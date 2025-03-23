@@ -1,5 +1,15 @@
 #!/usr/bin/env python3
 
+"""
+This script spawns 5 turtles at random positions within the turtlesim window.
+It first deletes the default turtle (turtle1) if it exists, then creates
+5 new turtles with unique names (turtle1, turtle2, etc.) at random (x, y)
+coordinates within the turtlesim workspace (0.0 to 11.0).
+
+Author: Claudia Mayoral, Nydia Hernández, Fabian, Andoni
+Date: 22/03/2025
+"""
+
 import rospy
 from turtlesim.srv import Spawn, Kill
 import sys
