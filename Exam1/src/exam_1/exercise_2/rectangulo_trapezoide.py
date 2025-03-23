@@ -1,5 +1,20 @@
 #!/usr/bin/env python3
 
+"""
+RectanguloTrapezoide.py
+This script is a ROS (Robot Operating System) node that controls a turtle in the turtlesim simulator.
+It allows the user to draw rectangles and trapezoids by moving the turtle to specific coordinates.
+The script includes functionality to spawn and kill turtles, subscribe to their position, and publish
+velocity commands to move them. It also provides a menu-driven interface for user interaction.
+
+The script uses proportional control to move the turtle to the desired positions and ensures that
+the figures fit within the workspace dimensions (11x11 units). After drawing, the turtle is killed,
+and the workspace is cleared.
+
+Author: Nydia Hernández Bravo
+Date: 22/03/2025
+"""
+
 import rospy
 from geometry_msgs.msg import Twist
 from turtlesim.msg import Pose
