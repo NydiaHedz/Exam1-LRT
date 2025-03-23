@@ -58,3 +58,65 @@ This program implements a system for drawing geometric shapes using the Turtlesi
 * Upon completion, the program notifies the user and waits for a key press to return to the main menu
 * Includes an option to exit the program
 
+### Main 
+Made by: Nydia Hernández Bravo
+
+The project consists of a main controller (`MainController`) that initializes and manages different modules for drawing geometric figures. Each module is responsible for drawing a specific pair of figures. The user interacts with the system through a text-based menu to select which figures to draw.
+
+#### Code Structure
+
+The project is organized into the following components:
+
+1. **Main Controller**:
+   - Initializes the ROS node.
+   - Manages the different drawing modules.
+   - Provides a menu for user interaction.
+
+2. **Drawing Modules**:
+   - `CuadradoRomboide`: Draws a square and a rhomboid.
+   - `RomboPentagono`: Draws a rhombus and a pentagon.
+   - `TrianguloTrapecio`: Draws a triangle and a trapezoid.
+   - `RectanguloTrapezoide`: Draws a rectangle and a trapezoid.
+
+## How It Works
+
+The `MainController` class initializes the ROS node and the drawing modules. It provides a menu for the user to select which pair of figures to draw.
+
+```python
+class MainController:
+    def __init__(self):
+        # Initialize the ROS node only once
+        rospy.init_node('main_controller', anonymous=True)
+
+        # Initialize the modules
+        self.cuadrado_romboide = CuadradoRomboide()
+        self.rombo_pentagono = RomboPentagono()
+        self.triangulo_trapecio = TrianguloTrapecio()
+        self.rectangulo_trapezoide = RectanguloTrapezoide()
+
+    def menu(self):
+        """Main menu to select which module to run."""
+        while not rospy.is_shutdown():
+            print("\nMain Menu")
+            print("1 -> Draw Square and Rhomboid")
+            print("2 -> Draw Rhombus and Pentagon")
+            print("3 -> Draw Triangle and Trapezoid")
+            print("4 -> Draw Rectangle and Trapezoid")
+            print("5 -> Exit")
+
+            option = input("Select an option: ")
+
+            if option == '1':
+                self.cuadrado_romboide.menu()
+            elif option == '2':
+                self.rombo_pentagono.menu()
+            elif option == '3':
+                self.triangulo_trapecio.menu()
+            elif option == '4':
+                self.rectangulo_trapezoide.menu()
+            elif option == '5':
+                print("Exiting...")
+                break
+            else:
+                print("Invalid option. Please try again.")
+```
