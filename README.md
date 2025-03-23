@@ -59,7 +59,7 @@ The developed code can be seen in: [turtle_five.py](https://github.com/NydiaHedz
    kill_turtle = rospy.ServiceProxy('/kill', Kill)
    ```
 
-## Exercise 1: Random Turtle Spawning
+## Exercise 2: Geometric Shape Drawing
 This program implements a system for drawing geometric shapes using the Turtlesim turtle. The main features are:
 
 * Selection menu with pairs of shapes:
