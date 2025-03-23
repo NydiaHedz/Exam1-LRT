@@ -379,4 +379,4 @@ After each figure, the code waits for the user to press a key to return to the m
 This code provides an interactive tool for creating geometric shapes in the TurtleSim environment of ROS. It uses **proportional control** to ensure that the turtle moves in a precise and controlled manner, drawing figures such as squares and rhomboids with accuracy. The code efficiently manages the creation and elimination of turtles, ensuring that no unnecessary turtles accumulate and that the workspace remains clean and organized. This provides a smooth interactive experience where the user can draw figures and return to the main menu without complications.
 
 Additionally, the program ensures that the coordinates provided by the user are within the workspace, and if they are not, the program notifies the user and requests new coordinates. This prevents errors and ensures that the figures are always drawn within the available space.
-
+---
