@@ -6,7 +6,7 @@ It first deletes the default turtle (turtle1) if it exists, then creates
 5 new turtles with unique names (turtle1, turtle2, etc.) at random (x, y)
 coordinates within the turtlesim workspace (0.0 to 11.0).
 
-Author: Claudia Mayoral, Nydia Hernández, Fabian, Andoni
+Author: Claudia Mayoral, Nydia Hernández, Fabian Molina, Andoni Diaz
 Date: 22/03/2025
 """
 
