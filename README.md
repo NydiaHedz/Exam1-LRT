@@ -296,3 +296,87 @@ if __name__ == '__main__':
 ```
 
 **Explanation**: Ensures that the script runs only when executed directly. It starts the turtle control and handles any ROS interruption exceptions gracefully.
+
+### Square and Rhomboid
+
+Made by: Claudia Fernanda Mayoral Sánchez
+
+#### General Objective
+
+The purpose of the code is to enable the creation and control of geometric shapes within the TurtleSim environment of ROS (Robot Operating System), with a focus on creating simple geometric shapes: **squares** and **rhomboids**. The user can choose only one of the two shapes to draw in the environment, providing the initial coordinates where they want the drawing to start.
+
+This interactive program uses **proportional control** to move the turtle precisely along the coordinates of the selected shape’s vertices. This ensures that the figures are drawn accurately, and at the end of each drawing, the workspace is cleared, allowing for a clean environment for new drawings. Additionally, proportional control helps stabilize the turtle's movement, preventing erratic movements and providing smooth and controlled motion of the turtle in the workspace. However, since the proportional controller is not the most precise, we can still observe oscillations during the turtle's drawing, as the movement continuously adjusts based on position error.
+
+
+#### General Flow of the Program
+
+1. **Elimination of the Initial Turtle**:
+   - The TurtleSim environment starts with an initial turtle located at coordinates `(5.5, 5.5)`. To avoid problems with the creation of new turtles and the management of multiple turtles, the code kills this initial turtle at the start of the program. This is achieved by calling the function `kill_initial_turtle()`, which uses the `/kill` ROS service to eliminate the default turtle.
+
+2. **Selection of the Figure to Draw**:
+   - Through an interactive menu, the user can choose only between two options:
+     1. Draw a **Square**.
+     2. Draw a **Rhomboid**.
+   - After selecting an option, the user enters the initial coordinates where they want the drawing to start.
+
+3. **Creating the Turtle for Drawing**:
+   - Once the user enters the coordinates, a new turtle is created in the workspace at those coordinates, using the `/spawn` service. This turtle will be responsible for drawing the selected figure. This is achieved by calling the function `create_turtle()`, which uses the ROS `Spawn` service.
+
+4. **Drawing the Figure**:
+   - The turtle moves from vertex to vertex of the selected figure (square or rhomboid) using proportional control to ensure smooth and precise movement.
+
+5. **Handling Coordinates Outside the Workspace**:
+   - If the coordinates entered by the user for the figure are outside the valid workspace area (`11x11`), the program will notify the user that the figure does not fit within the boundaries and will prompt them to enter new valid coordinates. This is achieved through the `validar_espacio` function.
+
+6. **Notification of Completion**:
+   - After completing the drawing, the program informs the user that the figure has been drawn successfully and waits for the user to press any key to return to the menu.
+
+7. **Elimination of the Turtle and Cleaning the Area**:
+   - After the drawing is complete, and the user presses a key to return to the menu, the turtle that performed the drawing is eliminated using the `/kill` service. Additionally, the area is cleared using the `/clear` service, ensuring that the workspace is clean and ready for the next drawing.
+
+8. **Returning to the Menu**:
+   - After pressing a key, the program deletes the turtle and clears the area, returning to the menu so the user can select whether they want to draw another figure or exit the program.
+
+---
+
+#### Proportional Control in the Code
+
+The **proportional control** is used to move the turtle in a controlled manner toward the target. This type of control adjusts the turtle's speed in proportion to the position error (the difference between the turtle's current position and the desired position).
+
+- **`move_to_point` function**: This function allows the turtle to move from one point to another using proportional control. As the turtle approaches the desired position, the speed decreases, preventing the turtle from moving erratically.
+- **Proportionality constant (`Kp`)**: This value adjusts the speed of the turtle. An appropriate value of `Kp` ensures that the turtle moves efficiently and without jerky movements.
+- **Stability**: The use of proportional control ensures that the turtle does not move too quickly as it approaches the destination, which is essential for maintaining precision when tracing the figures.
+
+This control is crucial for drawing geometric shapes accurately, allowing for smooth and controlled movements, ideal for tasks like the ones performed by this code.
+
+#### Implementation Details
+
+1. **User Interaction**:
+   - The code presents an interactive menu where the user can choose between drawing a **square** or a **rhomboid**. After selecting an option, the user is asked to input the initial coordinates to start the drawing.
+
+2. **Drawing of Figures**:
+   - **Square**: A square with a side length of 2 units is drawn. The turtle moves between the 4 vertices of the square. Although the square has 4 vertices, the console displays 5 points because the first point corresponds to the initial coordinates, and the last point returns to the starting point, closing the figure.
+   - **Rhomboid**: The rhomboid has a base of 3 units, a height of 2 units, and an angle of 30 degrees. The turtle moves between the 4 vertices of the rhomboid. Similar to the square, 5 points are displayed in the console for the same reason (the last point corresponds to the initial point to close the figure).
+
+3. **Elimination of Turtles and Cleaning**:
+   - After each drawing, the turtle used to perform the drawing is eliminated using the `/kill` service, ensuring that no turtles accumulate. Additionally, the workspace is cleared with the `/clear` service to remove any previous traces and leave the space ready for the next drawing.
+
+4. **Avoiding Errors with Multiple Turtles**:
+   - The code handles the creation and deletion of turtles efficiently, avoiding the creation of unnecessary turtles and ensuring that no turtles accumulate in the workspace, which could interfere with turtle control.
+
+#### Menu Options
+
+The interactive menu allows the user to choose from the following options:
+
+1. **Draw Square**: The user provides the coordinates for the square, and the turtle draws the figure. After completing the drawing, the area is cleared, and the turtle is eliminated.
+2. **Draw Rhomboid**: Similar to the square, the user provides the coordinates for the rhomboid, and the turtle draws the figure. After completing the drawing, the area is cleared, and the turtle is eliminated.
+3. **Exit**: Exits the program.
+
+After each figure, the code waits for the user to press a key to return to the menu, ensuring that the environment is clean and ready for the next drawing.
+
+#### Conclusion
+
+This code provides an interactive tool for creating geometric shapes in the TurtleSim environment of ROS. It uses **proportional control** to ensure that the turtle moves in a precise and controlled manner, drawing figures such as squares and rhomboids with accuracy. The code efficiently manages the creation and elimination of turtles, ensuring that no unnecessary turtles accumulate and that the workspace remains clean and organized. This provides a smooth interactive experience where the user can draw figures and return to the main menu without complications.
+
+Additionally, the program ensures that the coordinates provided by the user are within the workspace, and if they are not, the program notifies the user and requests new coordinates. This prevents errors and ensures that the figures are always drawn within the available space.
+
