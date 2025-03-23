@@ -1,0 +1,7 @@
+<launch>
+    <!-- Start the turtlesim node -->
+    <node name="turtlesim" pkg="turtlesim" type="turtlesim_node" output="screen" />
+
+    <!-- Start the turtle_five node -->
+    <node name="turtle_five" pkg="practicas_lab" type="turtle_five.py" output="screen" />
+</launch>
