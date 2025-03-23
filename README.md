@@ -389,22 +389,16 @@ This ROS (Robot Operating System) node allows you to control a turtle in the `tu
 
 #### Usage
 
-1. Start the `turtlesim` simulator:
+1. Start:
    ```bash
-   rosrun turtlesim turtlesim_node
+   roslaunch practicas_lab turtle_launch.launch
    ```
-
-2. Run the script:
-   ```bash
-   python3 RectanguloTrapezoide.py
-   ```
-
-3. Follow the menu prompts to:
+2. Follow the menu prompts to:
    - Draw a rectangle.
    - Draw a trapezoid.
    - Return to the main menu.
 
-4. After drawing a shape, the turtle will be killed, and the workspace will be cleared.
+3. After drawing a shape, the turtle will be killed, and the workspace will be cleared.
 
 #### Functionality
 
