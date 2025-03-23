@@ -5,6 +5,8 @@ This repository contains two exercises implemented using ROS (Robot Operating Sy
 ## Exercise 1: Random Turtle Spawning
 This program generates 5 additional turtles at random positions within the Turtlesim workspace. Each turtle is placed at random (x,y) coordinates with a random orientation. The program uses Turtlesim's Spawn service to create the new instances.
 
+The developed code can be seen in:
+
 ### Key Features
 1. **Deletion of the Default Turtle**:
    - The developed program attempts to delete the default turtle (`turtle1`) using the `/kill` service.
