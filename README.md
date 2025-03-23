@@ -58,12 +58,7 @@ This program implements a system for drawing geometric shapes using the Turtlesi
 * Upon completion, the program notifies the user and waits for a key press to return to the main menu
 * Includes an option to exit the program
 
-### Main 
-Made by: Nydia Hernández Bravo
-
-The project consists of a main controller (`MainController`) that initializes and manages different modules for drawing geometric figures. Each module is responsible for drawing a specific pair of figures. The user interacts with the system through a text-based menu to select which figures to draw.
-
-#### Code Structure
+### Code Structure
 
 The project is organized into the following components:
 
@@ -77,8 +72,13 @@ The project is organized into the following components:
    - `RomboPentagono`: Draws a rhombus and a pentagon.
    - `TrianguloTrapecio`: Draws a triangle and a trapezoid.
    - `RectanguloTrapezoide`: Draws a rectangle and a trapezoid.
+   - 
+### Main Code
+Made by: Nydia Hernández Bravo
 
-## How It Works
+The project consists of a main controller (`MainController`) that initializes and manages different modules for drawing geometric figures. Each module is responsible for drawing a specific pair of figures. The user interacts with the system through a text-based menu to select which figures to draw. This complete code can be seen in: [Main Code](https://github.com/NydiaHedz/Exam1-LRT/blob/main/Exam1/src/exam_1/exercise_2/main.py)
+
+**How It Works**
 
 The `MainController` class initializes the ROS node and the drawing modules. It provides a menu for the user to select which pair of figures to draw.
 
