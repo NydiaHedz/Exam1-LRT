@@ -1,0 +1,9 @@
+<launch>
+    <!-- Lanzar el nodo turtlesim_node del paquete turtlesim -->
+    <node pkg="turtlesim" type="turtlesim_node" name="turtlesim_node" output="screen"/>
+
+    <!-- Lanzar el script main.py del paquete practicas_lab -->
+    <node pkg="practicas_lab" type="main.py" name="turtle_controller" output="screen">
+        <param name="script_path" value="$(find practicas_lab)/src/exam_1/exercise_2/main.py"/>
+    </node>
+</launch>
