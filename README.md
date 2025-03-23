@@ -8,27 +8,15 @@ Andoni Díaz Castellanos 169292
 This repository contains two exercises implemented using ROS (Robot Operating System) to control turtles in the turtlesim simulator.
 
 ## Table of Contents
-1. [Introduction](#introduction)
 2. [Exercise 1: Random Turtle Spawning](#exercise-1-random-turtle-spawning)
-   - [Key Features](#key-features)
-     - [Deletion of the Default Turtle](#deletion-of-the-default-turtle)
-     - [Spawning Turtles at Random Positions](#spawning-turtles-at-random-positions)
-     - [Use of ROS Services](#use-of-ros-services)
-   - [Code Implementation](#code-implementation)
 3. [Exercise 2: Geometric Shape Drawing](#exercise-2-geometric-shape-drawing)
    - [General Structure](#general-structure)
    - [Key Features](#key-features-1)
-     - [User Interaction](#user-interaction)
-     - [Proportional Control](#proportional-control)
-     - [Workspace Validation](#workspace-validation)
-     - [Shape Drawing and Completion Notification](#shape-drawing-and-completion-notification)
    - [Drawing Modules](#drawing-modules)
      - [Rhombus and Pentagon](#rhombus-and-pentagon)
      - [Square and Rhomboid](#square-and-rhomboid)
      - [Rectangle and Trapezoid](#rectangle-and-trapezoid)
      - [Triangle and Isosceles Trapezoid](#triangle-and-isosceles-trapezoid)
-4. [Conclusion](#conclusion)
-5. [Contributors](#contributors)
    
 ## Exercise 1: Random Turtle Spawning
 This program generates 5 additional turtles at random positions within the Turtlesim workspace. Each turtle is placed at random (x,y) coordinates with a random orientation. The program uses Turtlesim's Spawn service to create the new instances.
@@ -414,19 +402,6 @@ Additionally, the program ensures that the coordinates provided by the user are 
 Made by: Nydia Hernández Bravo
 
 This ROS (Robot Operating System) node allows you to control a turtle in the `turtlesim` simulator to draw rectangles and trapezoids. The script provides a menu-driven interface for user interaction, enabling the user to spawn a turtle at specific coordinates, move it to draw shapes, and then clear the workspace. The complete code can be seen in: [rectangulo_trapezoide.py](https://github.com/NydiaHedz/Exam1-LRT/blob/main/Exam1/src/exam_1/exercise_2/rectangulo_trapezoide.py)
-
-#### Usage
-
-1. Start:
-   ```bash
-   roslaunch practicas_lab turtle_launch.launch
-   ```
-2. Follow the menu prompts to:
-   - Draw a rectangle.
-   - Draw a trapezoid.
-   - Return to the main menu.
-
-3. After drawing a shape, the turtle will be killed, and the workspace will be cleared.
 
 #### Functionality
 
