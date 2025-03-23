@@ -380,3 +380,153 @@ This code provides an interactive tool for creating geometric shapes in the Turt
 
 Additionally, the program ensures that the coordinates provided by the user are within the workspace, and if they are not, the program notifies the user and requests new coordinates. This prevents errors and ensures that the figures are always drawn within the available space.
 ---
+
+### Rectangle and Trapezoid
+
+Made by: Nydia Hernández Bravo
+
+This ROS (Robot Operating System) node allows you to control a turtle in the `turtlesim` simulator to draw rectangles and trapezoids. The script provides a menu-driven interface for user interaction, enabling the user to spawn a turtle at specific coordinates, move it to draw shapes, and then clear the workspace. The complete code can be seen in: [rectangulo_trapezoide.py](https://github.com/NydiaHedz/Exam1-LRT/blob/main/Exam1/src/exam_1/exercise_2/rectangulo_trapezoide.py)
+
+#### Usage
+
+1. Start the `turtlesim` simulator:
+   ```bash
+   rosrun turtlesim turtlesim_node
+   ```
+
+2. Run the script:
+   ```bash
+   python3 RectanguloTrapezoide.py
+   ```
+
+3. Follow the menu prompts to:
+   - Draw a rectangle.
+   - Draw a trapezoid.
+   - Return to the main menu.
+
+4. After drawing a shape, the turtle will be killed, and the workspace will be cleared.
+
+#### Functionality
+
+The script provides the following features:
+- **Kill the default turtle**: The initial turtle (`turtle1`) is killed to start with a clean workspace.
+- **Spawn a new turtle**: A new turtle is created at user-specified coordinates.
+- **Draw shapes**: The turtle can draw rectangles and trapezoids based on user input.
+- **Proportional control**: The turtle moves to target positions using proportional control for smooth movement.
+- **Workspace validation**: The script ensures that the shapes fit within the 11x11 unit workspace.
+- **Clear workspace**: After drawing, the workspace is cleared, and the turtle is killed.
+
+#### Code Structure
+
+The script is organized into a class `RectanguloTrapezoide` with the following methods:
+
+- **`__init__`**: Initializes the node, kills the default turtle, and sets up the workspace dimensions.
+- **`actualizar_posicion`**: Callback to update the turtle's current position.
+- **`suscribirse_posicion`**: Subscribes to the turtle's position topic.
+- **`configurar_publicador`**: Configures the velocity publisher for the turtle.
+- **`kill_initial_turtle`**: Kills the default turtle (`turtle1`).
+- **`crear_tortuga`**: Spawns a new turtle at specified coordinates.
+- **`mover_a_punto`**: Moves the turtle to a target position using proportional control.
+- **`validar_espacio`**: Validates if the shape fits within the workspace.
+- **`dibujar_rectangulo`**: Draws a rectangle.
+- **`dibujar_trapezoide`**: Draws a trapezoid.
+- **`matar_tortuga`**: Kills the turtle after drawing.
+- **`limpiar_area`**: Clears the workspace.
+- **`menu`**: Provides a menu for user interaction.
+
+#### How It Works
+
+1. When the script starts, it kills the default turtle (`turtle1`) to ensure a clean workspace.
+2. The user is presented with a menu to choose between drawing a rectangle or a trapezoid.
+3. The user provides the starting coordinates for the shape.
+4. A new turtle (`turtle2`) is spawned at the specified coordinates.
+5. The turtle moves to each corner of the shape using proportional control, ensuring smooth and accurate movement.
+6. After drawing the shape, the turtle is killed, and the workspace is cleared.
+7. The user can choose to draw another shape or exit the program.
+
+---
+
+### Triangle and Isosceles Trapezoid
+
+Made by: José Fabián Molina Enríquez 
+
+#### Introduction
+
+This code is designed to allow the user to select one of two geometric shapes (a triangle or an isosceles trapezoid), specify an initial starting position for the turtle, and then have the turtle draw the selected shape within the `turtlesim` work area (assumed to be from 0 to 11 on both the X and Y axes). The program displays the coordinates of each vertex on the console and checks that all vertices lie within the work area. If any vertex is outside the area, the user is notified and prompted for a new starting position. When the drawing is complete, the program waits for the user to press a key before clearing the screen and repositioning the turtle back to the starting point.
+
+A key requirement is the use of a proportional controller. In the version provided here, the turtle’s movement is split into two phases when moving to a vertex:
+
+1. **Rotation Phase**: The turtle rotates in place until its orientation is aligned with the target vertex.
+2. **Translation Phase**: Once properly oriented, the turtle moves straight toward the vertex.
+
+This two-phase approach ensures that the turtle draws straight lines rather than curves.
+
+#### 2. Dependencies and Libraries
+
+The code uses several ROS libraries and message/service types:
+
+- **`rospy`**: Provides the ROS Python API.
+- **`geometry_msgs.msg.Twist`**: Used for sending velocity commands.
+- **`turtlesim.msg.Pose`**: For receiving the current position and orientation of the turtle.
+- **`turtlesim.srv.TeleportAbsolute`**: Allows the turtle to be teleported to a specific location.
+- **`std_srvs.srv.Empty`**: Used to call the service that clears the `turtlesim` window.
+
+These libraries allow the code to subscribe to the turtle’s pose, publish velocity commands, and interact with services provided by `turtlesim` (teleporting and clearing the screen).
+
+#### 3. Code Structure and General Description
+
+The code is organized into several sections:
+
+### a) Global Variables
+
+- **`current_pose`**: A global variable that stores the current pose (position and orientation) of the turtle. It is updated by a callback function.
+
+##### b) Utility Functions
+
+- **`pose_callback(msg)`**: Updates `current_pose` with the latest pose data from the `/turtle1/pose` topic.
+- **`is_within_area(x, y, x_min=0, x_max=11, y_min=0, y_max=11)`**: Checks whether a given point `(x, y)` is within the defined work area.
+
+##### c) ROS Service Functions
+
+- **`clear_screen()`**: Calls the `/clear` service to clear the `turtlesim` window.
+- **`teleport_to(x, y, theta=0)`**: Uses the `/turtle1/teleport_absolute` service to move the turtle to a specific location and orientation.
+
+##### d) Shape Drawing Functions
+
+- **`draw_triangle(initial_x, initial_y)`**: Calculates the vertices of an equilateral triangle (with preset dimensions) based on the initial position. It displays the vertices on the console, validates that all vertices are inside the work area, and then draws the triangle by moving the turtle from vertex to vertex.
+- **`draw_trapezoid(initial_x, initial_y)`**: Calculates the vertices of an isosceles trapezoid, displays their coordinates, validates their positions, and draws the shape by sequentially moving to each vertex.
+
+##### e) Main Function
+
+- **`main()`**: Initializes the ROS node and subscribes to the turtle’s pose topic. It presents a menu for the user to select which shape to draw or to exit. It requests the starting position and, based on the user's choice, teleports the turtle to that position and calls the appropriate shape-drawing function. Once the drawing is finished, it waits for a key press, clears the screen, and returns the turtle to its initial position.
+
+
+#### 4. Proportional Controller (Two-Phase Movement)
+
+The core movement function, `move_to_point(target_x, target_y)`, uses a proportional controller split into two phases:
+
+##### Phase 1: Orientation
+
+- **Goal**: Rotate the turtle in place until its orientation aligns with the direction of the target vertex.
+- **Implementation**:
+  - Calculate the desired angle using `math.atan2`.
+  - Compute the angular error (difference between desired angle and current orientation).
+  - Normalize the angular error to ensure it lies within the range `[-π, π]`.
+  - Apply a proportional control (e.g., `twist.angular.z = 2.0 * angle_error`) until the error is very small (below a set threshold).
+
+##### Phase 2: Translation
+
+- **Goal**: Move the turtle straight toward the target vertex since the orientation is already correct.
+- **Implementation**:
+  - Calculate the distance to the target.
+  - Use a proportional controller for linear movement (e.g., `twist.linear.x = 1.0 * distance`) while allowing for slight angular correction if necessary.
+  - Continue until the turtle is within a small threshold distance from the target.
+
+This two-phase approach guarantees that the turtle draws straight segments by ensuring it first faces the correct direction before moving.
+
+#### 5. Conclusions and Considerations
+
+- **Modularity**: The code is divided into functions for specific tasks (pose handling, service calls, drawing shapes), making it easier to maintain and extend.
+- **ROS and Turtlesim Interaction**: The code leverages ROS topics and services to control the turtle’s behavior, including teleporting, clearing the screen, and moving with proportional control.
+- **Proportional Controller**: The proportional controller is used both for angular adjustment and for moving the turtle, split into orientation and translation phases to ensure straight-line movement.
+- **Work Area Validation**: Before drawing, each vertex is validated to ensure it lies within the defined work area. If not, the user is informed to provide a new starting position.
