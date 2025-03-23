@@ -1,5 +1,25 @@
 #!/usr/bin/env python3
 
+"""
+Main Controller for TurtleSim Figures
+=====================================
+
+This script serves as the main controller for drawing various geometric figures
+in the TurtleSim environment using ROS (Robot Operating System). It provides a
+menu-driven interface to select and execute different modules for drawing pairs
+of figures, such as squares, rhomboids, rhombuses, pentagons, triangles, and
+trapezoids.
+
+Modules:
+- CuadradoRomboide: Draws a square and a rhomboid.
+- RomboPentagono: Draws a rhombus and a pentagon.
+- TrianguloTrapecio: Draws a triangle and a trapezoid.
+- RectanguloTrapezoide: Draws a rectangle and a trapezoid.
+
+Author: Nydia Hernández Bravo
+Date: 22/03/2025
+"""
+
 import rospy
 from cuadrado_romboide import CuadradoRomboide
 from rombo_pentagono import RomboPentagono
